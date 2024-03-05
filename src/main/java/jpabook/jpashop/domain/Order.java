@@ -4,6 +4,8 @@ import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "ORDERS")
@@ -11,11 +13,23 @@ public class Order {
     @Id @GeneratedValue
     @Column(name = "ORDER_ID")
     private Long id;
-    @Column(name = "MEMBER_ID")
-    private Long memberid;
+//    @Column(name = "MEMBER_ID")
+//    private Long memberid;
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member memeber;
+
     private LocalDateTime orderDate;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    @OneToMany(mappedBy = "order") // 연관관계의 주인
+    private List<OrderItem> orderItems = new ArrayList<>();
+
+    public void addOrderItem(OrderItem orderItem){
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
 
     public Long getId() {
         return id;
@@ -25,12 +39,12 @@ public class Order {
         this.id = id;
     }
 
-    public Long getMemberid() {
-        return memberid;
+    public Member getMemeber() {
+        return memeber;
     }
 
-    public void setMemberid(Long memberid) {
-        this.memberid = memberid;
+    public void setMemeber(Member memeber) {
+        this.memeber = memeber;
     }
 
     public LocalDateTime getOrderDate() {

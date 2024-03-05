@@ -8,10 +8,20 @@ public class OrderItem {
     @Id @GeneratedValue
     @Column(name = "ORDER_ITEM_ID")
     private Long id;
-    @Column(name="ORDER_ID")
-    private Long orderID;
-    @Column(name = "MEMBER_ID")
-    private Long memberID;
+//    @Column(name="ORDER_ID")
+//    private Long orderID;
+
+    @ManyToOne
+    @JoinColumn(name="ORDER_ID")
+    private Order order;
+
+//    @Column(name = "ITEM_ID")
+//    private Long itemID;
+
+    @ManyToOne
+    @JoinColumn(name = "ITEM_ID")
+    private Item item;
+
     private LocalDateTime orderDate;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
@@ -24,20 +34,20 @@ public class OrderItem {
         this.id = id;
     }
 
-    public Long getOrderID() {
-        return orderID;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderID(Long orderID) {
-        this.orderID = orderID;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public Long getMemberID() {
-        return memberID;
+    public Item getItem() {
+        return item;
     }
 
-    public void setMemberID(Long memberID) {
-        this.memberID = memberID;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public LocalDateTime getOrderDate() {
