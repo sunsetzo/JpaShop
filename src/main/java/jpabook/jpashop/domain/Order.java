@@ -17,7 +17,11 @@ public class Order {
 //    private Long memberid;
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
-    private Member memeber;
+    private Member member;
+
+    @OneToOne
+    @JoinColumn(name = "DELIVERY_ID")
+    private Delivery delivery;
 
     private LocalDateTime orderDate;
     @Enumerated(EnumType.STRING)
@@ -40,11 +44,11 @@ public class Order {
     }
 
     public Member getMemeber() {
-        return memeber;
+        return member;
     }
 
     public void setMemeber(Member memeber) {
-        this.memeber = memeber;
+        this.member = memeber;
     }
 
     public LocalDateTime getOrderDate() {
