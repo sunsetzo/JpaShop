@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "ORDERS")
-public class Order {
+public class Order extends BaseEntity{
     @Id @GeneratedValue
     @Column(name = "ORDER_ID")
     private Long id;
@@ -43,12 +43,12 @@ public class Order {
         this.id = id;
     }
 
-    public Member getMemeber() {
+    public Member getMember() {
         return member;
     }
 
-    public void setMemeber(Member memeber) {
-        this.member = memeber;
+    public void setMember(Member member) {
+        this.member = member;
     }
 
     public LocalDateTime getOrderDate() {
